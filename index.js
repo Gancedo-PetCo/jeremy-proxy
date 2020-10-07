@@ -1,11 +1,13 @@
 const express = require('express');
 const serveStatic = require('serve-static');
 const morgan = require('morgan');
-
+const PATH = require('path');
 const server = express();
 
 server.use(morgan('dev'));
 server.use(serveStatic('./client/'));
+require('dotenv').config({ path: PATH.join(__dirname, '.env') });
+require('newrelic');
 
 server.get('/product/:itemId', (req, res) => {
   const itemIdNumber = req.params.itemId;
