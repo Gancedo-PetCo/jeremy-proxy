@@ -22,7 +22,7 @@ server.get('/product/:itemId', (req, res) => {
 });
 
 server.get(`/${LOADER_TOKEN}`, (req, res) => {
-  res.sendFile(PATH.resolve(__dirname, '../loader.txt'));
+  res.sendFile(PATH.resolve(__dirname, 'loader.txt'));
 });
 
 server.listen(3000);
