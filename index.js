@@ -8,6 +8,7 @@ server.use(morgan('dev'));
 server.use(serveStatic('./client/'));
 require('dotenv').config({ path: PATH.join(__dirname, '.env') });
 require('newrelic');
+const { LOADER_TOKEN } = process.env;
 
 server.get('/product/:itemId', (req, res) => {
   const itemIdNumber = req.params.itemId;
@@ -18,6 +19,10 @@ server.get('/product/:itemId', (req, res) => {
   } else {
     res.sendFile(`${__dirname}/client/index.html`);
   }
+});
+
+server.get(`/${LOADER_TOKEN}`, (req, res) => {
+  res.sendFile(PATH.resolve(__dirname, '../loader.txt'));
 });
 
 server.listen(3000);
